@@ -183,24 +183,24 @@ export const NFTProvider = ({ children }) => {
     }
   };
 
-  const checkIfWalletIsConnected = async () => {
-    if (!window.ethereum) return console.log("Make sure you have metamask!");
+  // const checkIfWalletIsConnected = async () => {
+  //   if (!window.ethereum) return console.log("Make sure you have metamask!");
 
-    const accounts = await window.ethereum.request({ method: "eth_accounts" });
-    if (accounts.length) {
-      setCurrentAccount(accounts[0]);
-    } else {
-      console.log("No accounts found!");
-    }
-    window.ethereum.on("accountsChanged", () => {
-      console.log("Accounts changed, reloading page...");
-      window.location.reload();
-    });
-  };
+  //   const accounts = await window.ethereum.request({ method: "eth_accounts" });
+  //   if (accounts.length) {
+  //     setCurrentAccount(accounts[0]);
+  //   } else {
+  //     console.log("No accounts found!");
+  //   }
+  //   window.ethereum.on("accountsChanged", () => {
+  //     console.log("Accounts changed, reloading page...");
+  //     // window.location.reload();
+  //   });
+  // };
 
-  useEffect(() => {
-    checkIfWalletIsConnected();
-  }, []);
+  // useEffect(() => {
+  //   checkIfWalletIsConnected();
+  // }, []);
 
   const connectWallet = async () => {
     try {
@@ -211,7 +211,6 @@ export const NFTProvider = ({ children }) => {
       });
 
       setCurrentAccount(accounts[0]);
-      window.location.reload();
     } catch (error) {
       console.log(error);
     }

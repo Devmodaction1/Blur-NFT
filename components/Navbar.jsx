@@ -6,8 +6,8 @@ import Link from "next/link";
 import blur from "../assets/blurLogo.png";
 import images from "../assets";
 import { NFTContext } from "../context/NFTcontext";
-import Button from "./Button";
 import Register from "./register";
+import axios from "axios";
 
 const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
   const generateLink = (i) => {
@@ -18,6 +18,8 @@ const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
         return "/listed-nfts";
       case 2:
         return "/my-nfts";
+      case 3:
+        return "/register";
       default:
         return "/";
     }
@@ -29,7 +31,7 @@ const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
         isMobile && "flex-col h-full"
       }`}
     >
-      {["Explore Market NFTs", "Listed NFTs Market", "My NFTs"].map(
+      {["Explore Market NFTs", "Listed NFTs Market", "My NFTs", "Register"].map(
         (item, i) => (
           <li
             key={i}
@@ -57,24 +59,59 @@ const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
 const ButtonGroup = ({ setActive, router }) => {
   const { connectWallet, currentAccount } = useContext(NFTContext);
 
+  const Connectwallet = async () => {
+    try {
+      await connectWallet();
+      const response = await axios.get(
+        "https://sheet.best/api/sheets/9369f753-2129-497a-8a6a-205601812052"
+      );
+
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      const currentWalletAddress = accounts[0];
+
+      const FilterWalletAddreses = await response?.data?.filter((data) => {
+        const dataWalletAddress = data?.Wallet_Address?.toLowerCase();
+        const currentAddressLowerCase = currentWalletAddress?.toLowerCase();
+        return dataWalletAddress === currentAddressLowerCase;
+      });
+
+      if (FilterWalletAddreses.length === 0) {
+        router.push("/register");
+      } else {
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Error connecting wallet:", error);
+    }
+  };
+
   return currentAccount ? (
     <div className="flexCenter">
-      {currentAccount ? (
-        <Register
-          classStyles="rounded-xl"
-          setActive={setActive}
-          router={router}
-        />
-      ) : null}
+      <button
+        onClick={() => {
+          setActive("");
+          router.push("/create-nft");
+        }}
+        className={`nft-gradient text-sm minlg:text-lg py-3 mx-2 px-6 minlg:px-8 font-poppins font-semibold text-white rounded-lg`}
+      >
+        <p className="text-sm font-medium leading-none text-white">
+          Create NFT
+        </p>
+      </button>
     </div>
   ) : (
     <>
-      <Button
+      <button
         btnName="Connect Wallet"
         btnType="outline"
-        classStyles="mx-2 rounded-xl"
-        handleClick={connectWallet}
-      />
+        className={`nft-gradient text-sm minlg:text-lg py-2 px-6 minlg:px-8 font-poppins font-semibold text-white rounded-lg mx-2 `}
+        onClick={Connectwallet}
+      >
+        Connect Wallet
+      </button>
     </>
   );
 };
@@ -89,6 +126,9 @@ const checkActive = (active, setActive, router) => {
       break;
     case "/my-nfts":
       if (active !== "My NFTs") setActive("My NFTs");
+      break;
+    case "/register":
+      if (active !== "Register") setActive("Register");
       break;
     case "/create-nft":
       if (active !== "") setActive("");

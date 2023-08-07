@@ -7,7 +7,8 @@ import { Banner, CreatorCard, Loader, NFTCard, SearchBar } from "../components";
 import { shortenAddress } from "../utils/shortendAddress";
 import { getCreators } from "../utils/getTopCreators";
 // import { makeId } from '../utils/makeId';
-import { NFTContext } from "../context/NFTcontext";
+import { NFTContext, currentAccount } from "../context/NFTcontext";
+import axios from "axios";
 
 const Home = () => {
   const { theme } = useTheme();
@@ -31,6 +32,32 @@ const Home = () => {
       current.scrollLeft += scrollAmount;
     }
   };
+
+  // useEffect(() => {
+  //   const getExcelData = async () => {
+  //     const response = await axios.get(
+  //       "https://sheet.best/api/sheets/9369f753-2129-497a-8a6a-205601812052"
+  //     );
+  //     const accounts = await window.ethereum.request({
+  //       method: "eth_requestAccounts",
+  //     });
+
+  //     const currentWalletAddress = accounts[0];
+  //     const FilterWalletAddreses = response.data.filter((data) => {
+  //       return data.Wallet_Address === currentWalletAddress;
+  //     });
+  //     console.log(
+  //       "🚀 ~ file: index.js:48 ~ FilterWalletAddreses ~ FilterWalletAddreses:",
+  //       FilterWalletAddreses
+  //     );
+  //     if (FilterWalletAddreses.length === 0) {
+  //       console.log("Un authorized");
+  //     } else {
+  //       console.log("A uthorized");
+  //     }
+  //   };
+  //   getExcelData();
+  // }, []);
 
   useEffect(() => {
     fetchNFTs().then((items) => {
