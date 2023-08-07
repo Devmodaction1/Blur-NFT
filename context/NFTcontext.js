@@ -27,7 +27,7 @@ export const NFTContext = React.createContext();
 export const NFTProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isLoadingNFT, setIsLoadingNFT] = useState(false);
-  const nftCurrency = "MATIC";
+  const nftCurrency = "ETH";
 
   const uploadToIPFS = async (file) => {
     try {
