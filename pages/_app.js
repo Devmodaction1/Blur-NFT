@@ -1,10 +1,9 @@
-import Head from 'next/head';
-import Script from 'next/script';
-import { ThemeProvider } from 'next-themes';
-import NextNProgress from 'nextjs-progressbar';
-import { NFTProvider } from '../context/NFTcontext';
-import '../styles/globals.css';
-import { Navbar, Footer } from '../components';
+import Head from "next/head";
+import { ThemeProvider } from "next-themes";
+import NextNProgress from "nextjs-progressbar";
+import { NFTProvider } from "../context/NFTcontext";
+import "../styles/globals.css";
+import { Navbar, Footer } from "../components";
 
 const App = ({ Component, pageProps }) => (
   <NFTProvider>
@@ -12,9 +11,9 @@ const App = ({ Component, pageProps }) => (
       <div
         style={{
           backgroundImage: "url('/blurBackground.png')",
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
         }}
         className="dark:bg-nft-dark"
       >
@@ -24,9 +23,19 @@ const App = ({ Component, pageProps }) => (
             name="description"
             content="Market NFT where you can buy and sell new NFTs."
           />
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
           <link rel="icon" href="/favicon.ico" />
-          <Script async src="https://www.thatquery.com/script.js" data-website-id="ea038c3c-b76f-4af4-80b8-a16f676e0f44" />
+
+          {/* FONT */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+Vithkuqi&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <NextNProgress
           color="#EB1484"
@@ -42,8 +51,6 @@ const App = ({ Component, pageProps }) => (
         </div>
         <Footer />
       </div>
-
-      <Script src="https://kit.fontawesome.com/d45b25ceeb.js" crossorigin="anonymous" />
     </ThemeProvider>
   </NFTProvider>
 );

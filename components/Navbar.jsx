@@ -7,6 +7,7 @@ import blur from "../assets/blurLogo.png";
 import images from "../assets";
 import { NFTContext } from "../context/NFTcontext";
 import Button from "./Button";
+import Register from "./register";
 
 const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
   const generateLink = (i) => {
@@ -58,23 +59,23 @@ const ButtonGroup = ({ setActive, router }) => {
 
   return currentAccount ? (
     <div className="flexCenter">
-      <Button
-        btnName="Create NFT"
-        btnType="primary"
-        classStyles="mx-2 rounded-xl"
-        handleClick={() => {
-          setActive("");
-          router.push("/create-nft");
-        }}
-      />
+      {currentAccount ? (
+        <Register
+          classStyles="rounded-xl"
+          setActive={setActive}
+          router={router}
+        />
+      ) : null}
     </div>
   ) : (
-    <Button
-      btnName="Connect Wallet"
-      btnType="outline"
-      classStyles="mx-2 rounded-xl"
-      handleClick={connectWallet}
-    />
+    <>
+      <Button
+        btnName="Connect Wallet"
+        btnType="outline"
+        classStyles="mx-2 rounded-xl"
+        handleClick={connectWallet}
+      />
+    </>
   );
 };
 
