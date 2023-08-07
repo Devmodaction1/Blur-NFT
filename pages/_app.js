@@ -28,14 +28,6 @@ const App = ({ Component, pageProps }) => (
             content="initial-scale=1.0, width=device-width"
           />
           <link rel="icon" href="/favicon.ico" />
-
-          {/* FONT */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+Vithkuqi&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <NextNProgress
           color="#EB1484"

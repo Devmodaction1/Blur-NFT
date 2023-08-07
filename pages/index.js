@@ -8,7 +8,6 @@ import { shortenAddress } from "../utils/shortendAddress";
 import { getCreators } from "../utils/getTopCreators";
 // import { makeId } from '../utils/makeId';
 import { NFTContext } from "../context/NFTcontext";
-import Script from "next/script";
 
 const Home = () => {
   const { theme } = useTheme();
