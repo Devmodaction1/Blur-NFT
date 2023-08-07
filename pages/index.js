@@ -33,32 +33,6 @@ const Home = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const getExcelData = async () => {
-  //     const response = await axios.get(
-  //       "https://sheet.best/api/sheets/9369f753-2129-497a-8a6a-205601812052"
-  //     );
-  //     const accounts = await window.ethereum.request({
-  //       method: "eth_requestAccounts",
-  //     });
-
-  //     const currentWalletAddress = accounts[0];
-  //     const FilterWalletAddreses = response.data.filter((data) => {
-  //       return data.Wallet_Address === currentWalletAddress;
-  //     });
-  //     console.log(
-  //       "🚀 ~ file: index.js:48 ~ FilterWalletAddreses ~ FilterWalletAddreses:",
-  //       FilterWalletAddreses
-  //     );
-  //     if (FilterWalletAddreses.length === 0) {
-  //       console.log("Un authorized");
-  //     } else {
-  //       console.log("A uthorized");
-  //     }
-  //   };
-  //   getExcelData();
-  // }, []);
-
   useEffect(() => {
     fetchNFTs().then((items) => {
       setNfts(items.reverse());
