@@ -19,10 +19,7 @@ export default function Register() {
       Message: userData.message,
     };
     try {
-      await axios.post(
-        "https://sheet.best/api/sheets/9369f753-2129-497a-8a6a-205601812052",
-        data
-      );
+      await axios.post(`${process.env.NEXT_PUBLIC_SHEET_URI}`, data);
       router.push("/");
     } catch (err) {
       console.log(err, "data submit error line:27");

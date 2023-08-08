@@ -6,7 +6,6 @@ import Link from "next/link";
 import blur from "../assets/blurLogo.png";
 import images from "../assets";
 import { NFTContext } from "../context/NFTcontext";
-import Register from "./register";
 import axios from "axios";
 
 const MenuItems = ({ isMobile, active, setActive, setIsOpen }) => {
@@ -62,9 +61,7 @@ const ButtonGroup = ({ setActive, router }) => {
   const Connectwallet = async () => {
     try {
       await connectWallet();
-      const response = await axios.get(
-        "https://sheet.best/api/sheets/9369f753-2129-497a-8a6a-205601812052"
-      );
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_SHEET_URI}`);
 
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",

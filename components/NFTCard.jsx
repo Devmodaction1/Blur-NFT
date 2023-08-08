@@ -11,9 +11,7 @@ const NFTCard = ({ nft, onProfilePage }) => {
   const router = useRouter();
 
   const handleClaim = async () => {
-    const response = await axios.get(
-      "https://sheet.best/api/sheets/9369f753-2129-497a-8a6a-205601812052"
-    );
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SHEET_URI}`);
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });

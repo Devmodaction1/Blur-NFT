@@ -87,8 +87,11 @@ export const NFTProvider = ({ children }) => {
   const fetchNFTs = async () => {
     setIsLoadingNFT(false);
     const provider = new ethers.providers.JsonRpcProvider(
-      `https://polygon-mumbai.infura.io/v3/${INFURA_API_KEY}`
+      `${process.env.NEXT_PUBLIC_INFURA_API_ENDPOINT}${process.env.NEXT_PUBLIC_INFURA_API_KEY}`
     );
+    // const provider = new ethers.providers.JsonRpcProvider(
+    //   `https://polygon-mumbai.infura.io/v3/${INFURA_API_KEY}`
+    // );
     const contract = await fetchContract(provider);
 
     const data = await contract.fetchMarketItems();

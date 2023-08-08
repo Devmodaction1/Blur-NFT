@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity =0.8.10;
+pragma solidity >=0.8.2 <0.9.0;
 
 // Using ERC721 standard
 // Functionality we can use
